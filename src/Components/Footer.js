@@ -1,1 +1,0 @@
-// Example Footer component
