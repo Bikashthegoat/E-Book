@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiction Books</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background-color: #f5f6fa;
+            padding-bottom: 60px;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        .app-header {
+            background-color: #fff;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .hamburger-menu {
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .menu-options {
+            display: none;
+            position: absolute;
+            top: 70px;
+            right: 10px;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            z-index: 1000;
+        }
+
+        .menu-options.active {
+            display: block;
+        }
+
+        .menu-item {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+        }
+
+        .menu-item:hover {
+            color: #4a90b5;
+        }
+
+        .search-container {
+            padding: 0.5rem;
+            background-color: #fff;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background-color: #f5f6fa;
+            border-radius: 8px;
+            padding: 0.5rem;
+        }
+
+        .search-input {
+            flex: 1;
+            border: none;
+            background: none;
+            padding: 0.5rem;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .book-list {
+            padding: 1rem;
+        }
+
+        .book-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .book-card:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .book-cover {
+            width: 64px;
+            height: 80px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.75rem;
+            text-align: center;
+            padding: 0.5rem;
+        }
+
+        .book-info {
+            flex: 1;
+        }
+
+        .book-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.25rem;
+        }
+
+        .book-author {
+            color: #666;
+            font-size: 0.875rem;
+        }
+
+        .book-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .star {
+            color: #ffd700;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background-color: #fff;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            text-decoration: none;
+            font-size: 0.8rem;
+            gap: 0.25rem;
+        }
+
+        .nav-item.active {
+            color: #4a90b5;
+        }
+
+        .nav-icon {
+            font-size: 1.4rem;
+        }
+
+        .chatbot-icon {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background-color: #5a6b7d;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .chatbot-icon:hover {
+            background-color: #4a90b5;
+        }
+    </style>
+</head>
+<body>
+    <header class="app-header">
+        <h1 style="font-size: 1.5rem; color: #5a6b7d;">Fiction Books</h1>
+        <div class="hamburger-menu" id="hamburgerMenu">☰</div>
+        <div class="menu-options" id="menuOptions">
+            <div class="menu-item">Profile</div>
+            <div class="menu-item">Cart</div>
+            <div class="menu-item">Help</div>
+            <div class="menu-item">Support</div>
+            <div class="menu-item">Downloads</div>
+            <div class="menu-item">Settings</div>
+        </div>
+    </header>
+
+    <div class="search-container">
+        <div class="search-box">
+            <input type="text" class="search-input" placeholder="Search books here...">
+            <div style="padding: 0.5rem">🔍</div>
+        </div>
+    </div>
+
+    <div class="book-list">
+        <div class="book-card">
+            <div class="book-cover" style="background-color: #c85c5c;">The Midnight Library</div>
+            <div class="book-info">
+                <div class="book-title">The Midnight Library</div>
+                <div class="book-author">Matt Haig</div>
+            </div>
+            <div class="book-rating">
+                <span class="star">★</span>
+                <span>4.8</span>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <div class="book-cover" style="background-color: #6a9bc5;">Project Hail Mary</div>
+            <div class="book-info">
+                <div class="book-title">Project Hail Mary</div>
+                <div class="book-author">Andy Weir</div>
+            </div>
+            <div class="book-rating">
+                <span class="star">★</span>
+                <span>4.5</span>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <div class="book-cover" style="background-color: #58a87b;">Dune</div>
+            <div class="book-info">
+                <div class="book-title">Dune</div>
+                <div class="book-author">Frank Herbert</div>
+            </div>
+            <div class="book-rating">
+                <span class="star">★</span>
+                <span>4.7</span>
+            </div>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="#" class="nav-item active">
+            <span class="nav-icon">🏠</span>
+            <span>Home</span>
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-icon">📚</span>
+            <span>Library</span>
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-icon">🛒</span>
+            <span>Cart</span>
+        </a>
+    </nav>
+
+    <div class="chatbot-icon">📖</div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const menu = document.getElementById("menuOptions");
+            document.getElementById("hamburgerMenu").addEventListener("click", () => {
+                menu.classList.toggle("active");
+            });
+        });
+    </script>
+</body>
+</html>
